@@ -1,5 +1,5 @@
 
-class Base {
+class Model {
 	constructor(tableName){
 	this.id = null; 
 	this._tableName = tableName;
@@ -70,4 +70,4 @@ class Base {
 		return obj;
 	}
 }
-module.exports = Base;
+module.exports = Model;
