@@ -1,7 +1,6 @@
 
 module.exports = (() => {
     const dotenv = require('dotenv');
-    const logger = require('../utils/logger');
   
     const options = {
         user: process.env.DB_USER,
@@ -12,7 +11,7 @@ module.exports = (() => {
         ssl: true
     };
   
-    const createTables = (client) => {
+    const init = (client) => {
     }
     return {
        options, createTables
