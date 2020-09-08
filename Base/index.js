@@ -1,5 +1,5 @@
-const Database = require('../Database');
-const queryBuilder = require('../QueryBuilder');
+const Database = require('../Database/Connection');
+const queryBuilder = require('../Database/Utils').queryBuilder;
 
 class Base {
 	constructor(tableName){
