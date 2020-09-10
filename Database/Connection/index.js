@@ -25,7 +25,7 @@ module.exports = (() => {
     const wrapper = (query, params = []) => pool.query(query, params);
 
 
-    (async () => {
+  const connect = async () => {
         let client = await pool
             .connect();
 
@@ -34,8 +34,9 @@ module.exports = (() => {
             console.log('Database connected');
         }
 
-    })()
+    };
     return {
+        connect: connect
         query: wrapper
     }
 })();
