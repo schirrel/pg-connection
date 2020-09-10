@@ -36,7 +36,7 @@ module.exports = (() => {
 
     };
     return {
-        connect: connect
+        connect: connect,
         query: wrapper
     }
 })();
