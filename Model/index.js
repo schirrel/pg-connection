@@ -36,13 +36,13 @@ class Model {
 		
 	}
 
-	_addColumn(property, column, defaultVal) {
+	addColumn(property, column, defaultVal) {
 		this._columns[property] = column;
 		this._columnsInverse[column] = property;
 		if((typeof defaultVal !== "undefined")) this._defaults[property] = defaultVal;
 	}
 
-	_getColumn(property) {
+	getColumn(property) {
 		return this._columns[property];
 	}
 	
