@@ -20,11 +20,10 @@
   "bugs": {
     "url": "https://github.com/schirrel/pg-connection/issues"
   },
-  
   "dependencies": {
     "dotenv": "^8.2.0",
     "pg": "^8.2.2"
-},
+  },
   "homepage": "https://github.com/schirrel/pg-connection#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
