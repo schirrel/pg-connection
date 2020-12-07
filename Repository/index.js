@@ -5,6 +5,7 @@ class Repository {
   
   constructor(_table) {
 	this.table = _table;
+	//Database.connect();
   }
   
   
