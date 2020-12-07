@@ -2,7 +2,6 @@
 class Model {
 	constructor(tableName){
 	this.id = null; 
-	this._tableName = tableName;
 	this.tableName = tableName;
 	this._columnsInverse = {ID:'id'}
 	this._columns = {id: 'ID'};
