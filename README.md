@@ -14,9 +14,9 @@ Uses `.env`  to aquire credentials.
 |PG_URL| Required |  | |
 |PG_DATABASE |Required  | | |
 |PG_PASSWORD |Required  | | |
-|PG_PORT | Optinal |5432 | |
-|PG_SSL | Optinal |false | |
-|PG_LOG | Optinal |false | |
+|PG_PORT | Optional |5432 | |
+|PG_SSL | Optional |false | |
+|PG_LOG | Optional |false | |
 
 
 
