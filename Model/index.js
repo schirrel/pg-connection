@@ -7,9 +7,6 @@ class Model {
 	this._columns = {id: 'ID'};
 	this._defaults = {  };
 	}	
-	getColumn(property) {
-		return this._columns[property];
-	}
 	
 	setValues(vals, fromDatabase) {
 		if(fromDatabase){
