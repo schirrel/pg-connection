@@ -1,6 +1,6 @@
 {
-  "name": "pg-connection",
-  "version": "1.0.0",
+  "name": "@schirrel/pg-connection",
+  "version": "0.0.0",
   "description": "a simple pg wrapper",
   "main": "index.js",
   "scripts": {
@@ -25,5 +25,8 @@
     "dotenv": "^8.2.0",
     "pg": "^8.2.2"
 },
-  "homepage": "https://github.com/schirrel/pg-connection#readme"
+  "homepage": "https://github.com/schirrel/pg-connection#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
 }
