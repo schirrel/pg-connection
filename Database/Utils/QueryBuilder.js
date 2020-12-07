@@ -1,6 +1,7 @@
 module.exports = (() => {
 
-	const insert = (tableName, params) => {
+class QueryBuilder {
+	static  insert (tableName, params)  {
 		let values = ' VALUES (';
 		let myQuery = 'insert into ' + tableName + " (";
 		let keys = Object.keys(params);
@@ -19,8 +20,7 @@ module.exports = (() => {
 			values: arrayValues
 		};
 	}
-
-	const update = (tableName, params) => {
+	static update (tableName, params) {
 		let myQuery = 'UPDATE ' + tableName + " SET ";
 		let keys = Object.keys(params).filter(k => k != 'id');
 		let vals = [];
@@ -39,8 +39,7 @@ module.exports = (() => {
 			values: vals
 		};
 	}
-
-	const search  = (table, options) => {
+	static search  (table, options) {
 		let myQuery = `SELECT *  FROM ${table.tableName} where `;
 		let keys = Object.keys(options);
 		let vals = [];
@@ -59,9 +58,22 @@ module.exports = (() => {
 
 
 	}
+	static delete (table, id) {
+
+		return {query: `DELETE FROM ${table.tableName} where ${table.getColumn('id')}  =  $1`, vals:[id]};
+	}
+	static get (table, id) {
+
+		return {query: `SELECT * FROM ${table.tableName} where ${table.getColumn('id')}  =  $1`, vals:[id]};
+	}
+	static list (tableName) {
+
+		return {query: `SELECT * FROM ${tableName}`, vals:[]};
+	}
+
+}
 
 
-	return {
-		insert, update, search
-	};
+
+	return QueryBuilder;
 })();

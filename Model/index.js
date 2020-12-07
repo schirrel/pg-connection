@@ -3,6 +3,7 @@ class Model {
 	constructor(tableName){
 	this.id = null; 
 	this._tableName = tableName;
+	this.tableName = tableName;
 	this._columnsInverse = {ID:'id'}
 	this._columns = {id: 'ID'};
 	this._defaults = {  };
@@ -12,7 +13,7 @@ class Model {
 		return this._columns[property];
 	}
 	
-	_setValues(vals, fromDatabase) {
+	setValues(vals, fromDatabase) {
 		if(fromDatabase){
 			for(let key in vals){
 				if(this._columnsInverse[key]) {
@@ -46,7 +47,7 @@ class Model {
 	}
 	
 	
-	_createUpdateObject() {
+	createUpdateObject() {
 		let obj = {};
 
 		//Get all value and set it in a Column name variables
@@ -58,7 +59,7 @@ class Model {
 		return obj;
 	}
 	
-	_createPersistObject() {
+	createPersistObject() {
 		let obj = {};
 
 		for (var col in this._columns) {

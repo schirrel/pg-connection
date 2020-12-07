@@ -1,19 +1,17 @@
 
 module.exports = (() => {
     const dotenv = require('dotenv');
-  
-    const options = {
-        user: process.env.DB_USER,
-        host: process.env.DB_URL,
-        database: process.env.DB_DATABASE,
-        password: process.env.DB_PASSWORD,
+    dotenv.config();
+    const config = {
+        options :{            
+        user: process.env.PG.USER,
+        host: process.env.PG.URL,
+        database: process.env.PG.DATABASE,
+        password: process.env.PG.PASSWORD,
         port: 5432,
         ssl: true
+        },
+        log: process.env.PG.LOG == 'true'
     };
-  
-    const init = (client) => {
-    }
-    return {
-       options, createTables
-    }
+    return config;
 })();
