@@ -4,27 +4,23 @@ module.exports = (() => {
         Pool
     } = require('pg');
 
-  
+
     const pool = new Pool(config.options);
 
-  pool.on('connect', () => {
+    pool.on('connect', () => {
         config.init();
-        if(config.log)
-        console.log('Database connected');
+        if (config.log)
+            console.log('Database connected');
     });
 
     const query = (query, params = []) => pool.query(query, params);
 
 
-  const connect = async () => {
+    const connect = async () => {
         let client = await pool
             .connect();
 
-        if (client) {
-            if(config.log)
-            console.log('Database connected');
-        }
-
+        client.query('SELECT 1');
     };
     return {
         connect: connect,
