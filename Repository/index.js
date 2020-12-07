@@ -6,7 +6,6 @@ class Repository {
 		  throw Error('Table muste be a instance of Model');
 	  }
 	this.table = _table;
-	//Database.connect();
   }
   
   
