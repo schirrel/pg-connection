@@ -8,8 +8,8 @@ module.exports = (() => {
         host: process.env.PG_URL,
         database: process.env.PG_DATABASE,
         password: process.env.PG_PASSWORD,
-        port: process.env.PG_PASSWORD || 5432,
-        ssl: process.env.PG_PASSWORD == 'true'
+        port: process.env.PG_PORT || 5432,
+        ssl: process.env.PG_SSL == 'true'
         },
         log: process.env.PG_LOG == 'true'
     };
