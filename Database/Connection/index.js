@@ -1,5 +1,5 @@
 module.exports = (() => {
-    const config = require('./Config');
+    const config = require('../Config');
     const {
         Pool
     } = require('pg');
