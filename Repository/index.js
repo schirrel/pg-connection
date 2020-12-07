@@ -28,7 +28,7 @@ class Repository {
 		model.setValues(response || {}, true)
 		return model;
 	}
-	async save(model) 
+	async create(model) 
 	{
 		let obj = model.createPersistObject()
 		let toPersist = queryBuilder.insert(this.table.tableName, obj);
