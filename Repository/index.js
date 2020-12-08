@@ -69,21 +69,21 @@ class Repository {
 		return this._setValues(response || {});
 	}
 
-	static async list() 
+	async list() 
 	{
 		const res = await Database.query(`SELECT * FROM ${this.tableName}`, []);
 		let response = await res.rows;
         return response ;
 		
 	}
-	static async search (options) {
+	async search (options) {
 		const params = QueryBuilder.search(new this.table(), options);
 		const res = await Database.query(params.query, params.values);
 		let response = await res.rows;
 		//TODO APPLY CONVERTION FROM DATABASE TO MODEL
         return response ;
 	}
-	static async paginate(options) 
+	async paginate(options) 
 	{
 			//TODO
 	}

@@ -1,6 +1,6 @@
 {
   "name": "@schirrel/pg-connection",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "a simple pg wrapper",
   "main": "index.js",
   "scripts": {
