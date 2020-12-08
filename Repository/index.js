@@ -1,5 +1,6 @@
 const Model = require('../Model');
 const QueryBuilder = require('../Utils/QueryBuilder');
+const Logger = require('../Utils/Logger');
 
 class Repository {
   
@@ -17,7 +18,7 @@ class Repository {
 		const res = await Database.query(persistObject.query, persistObject.values);
 			return res;
 		} catch(err) {  
-			this.logger.error(err);
+			Logger.error(err);
 			err.erro = 'ERRO';
 			return err;
 		}
