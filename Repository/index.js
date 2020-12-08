@@ -29,7 +29,7 @@ class Repository {
 		return model;
 	}
 	convert(model) {
-		if(model instaceOf this.table) {
+		if(model instanceof this.table) {
 			return model;
 		} else {
 			
