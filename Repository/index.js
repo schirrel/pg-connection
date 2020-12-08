@@ -1,4 +1,6 @@
 const Model = require('../Model');
+const QueryBuilder = require('../Utils/QueryBuilder');
+
 class Repository {
   
   constructor(_table) {
@@ -22,7 +24,7 @@ class Repository {
 	}
 
 	async get(id) {
-		const res = await Database.query(queryBuilder.get(this.table.tableName), [id]);
+		const res = await Database.query(QueryBuilder.get(this.table.tableName), [id]);
 		let response = await res.rows[0];
 		let model = new this.table();
 		model.setValues(response || {}, true)
@@ -41,25 +43,25 @@ class Repository {
 	}
 	async create(model) 
 	{
-		return await _create(convert(model));
+		return await this._create(this.convert(model));
 	}
 	async update(model) {
-		return await _update(convert(model));
+		return await this._update(this.convert(model));
 	}
 
 	async _create(model) 
 	{
 		let obj = model.createPersistObject()
-		let toPersist = queryBuilder.insert(this.table.tableName, obj);
+		let toPersist = QueryBuilder.insert(this.table.tableName, obj);
 		return await this.persist(toPersist);
 	}
 	async _update(model) {
 		let obj = model.createUpdateObject()
-		let toPersist = queryBuilder.update(this.table.tableName, obj);
+		let toPersist = QueryBuilder.update(this.table.tableName, obj);
 		return await this.persist(toPersist);
 	}
 	async delete(id) {	
-		const res = await Database.query(queryBuilder.delete(this.table.tableName), [id]);
+		const res = await Database.query(QueryBuilder.delete(this.table.tableName), [id]);
 		let response = await res.rows[0];
 		return this._setValues(response || {});
 	}
@@ -72,7 +74,7 @@ class Repository {
 		
 	}
 	static async search (options) {
-		const params = queryBuilder.search(new this.table(), options);
+		const params = QueryBuilder.search(new this.table(), options);
 		const res = await Database.query(params.query, params.values);
 		let response = await res.rows;
 		//TODO APPLY CONVERTION FROM DATABASE TO MODEL
