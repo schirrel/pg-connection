@@ -8,7 +8,6 @@ module.exports = (() => {
     const pool = new Pool(config.options);
 
     pool.on('connect', () => {
-        config.init();
         if (config.log)
             console.log('Database connected');
     });
@@ -19,7 +18,6 @@ module.exports = (() => {
     const connect = async () => {
         let client = await pool
             .connect();
-
         client.query('SELECT 1');
     };
     return {
