@@ -10,6 +10,7 @@ class Repository {
 		  throw Error('Table muste be a instance of Model');
 	  }
 	this.table = _table;
+	this.tableName = new _table().tableName;
   }
   
   
@@ -26,7 +27,7 @@ class Repository {
 	}
 
 	async get(id) {
-		const res = await Database.query(QueryBuilder.get(this.table.tableName), [id]);
+		const res = await Database.query(QueryBuilder.get(this.tableName), [id]);
 		let response = await res.rows[0];
 		let model = new this.table();
 		model.setValues(response || {}, true)
@@ -54,23 +55,23 @@ class Repository {
 	async _create(model) 
 	{
 		let obj = model.createPersistObject()
-		let toPersist = QueryBuilder.insert(this.table.tableName, obj);
+		let toPersist = QueryBuilder.insert(this.tableName, obj);
 		return await this.persist(toPersist);
 	}
 	async _update(model) {
 		let obj = model.createUpdateObject()
-		let toPersist = QueryBuilder.update(this.table.tableName, obj);
+		let toPersist = QueryBuilder.update(this.tableName, obj);
 		return await this.persist(toPersist);
 	}
 	async delete(id) {	
-		const res = await Database.query(QueryBuilder.delete(this.table.tableName), [id]);
+		const res = await Database.query(QueryBuilder.delete(this.tableName), [id]);
 		let response = await res.rows[0];
 		return this._setValues(response || {});
 	}
 
 	static async list() 
 	{
-		const res = await Database.query(`SELECT * FROM ${this.table.tableName}`, []);
+		const res = await Database.query(`SELECT * FROM ${this.tableName}`, []);
 		let response = await res.rows;
         return response ;
 		

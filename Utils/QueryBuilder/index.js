@@ -1,7 +1,11 @@
+
+const config = require('../../Database/Config');
+
 class QueryBuilder {
-	static  insert (tableName, params)  {
+	static insert(tableName, params) {
 		let values = ' VALUES (';
-		let myQuery = 'insert into ' + tableName + " (";
+		
+		let myQuery = `insert into ${config.schema}.${tableName}  (`;
 		let keys = Object.keys(params);
 
 		for (let i = 0; i < keys.length; i++) {
@@ -18,8 +22,8 @@ class QueryBuilder {
 			values: arrayValues
 		};
 	}
-	static update (tableName, params) {
-		let myQuery = 'UPDATE ' + tableName + " SET ";
+	static update(tableName, params) {
+		let myQuery = `UPDATE ${config.schema}.${tableName}  SET`;
 		let keys = Object.keys(params).filter(k => k != 'id');
 		let vals = [];
 		for (let i = 0; i < keys.length; i++) {
@@ -37,16 +41,16 @@ class QueryBuilder {
 			values: vals
 		};
 	}
-	static search  (table, options) {
-		let myQuery = `SELECT *  FROM ${table.tableName} where `;
+	static search(table, options) {
+		let myQuery = `SELECT *  FROM ${config.schema}.${table.tableName}  where`;
 		let keys = Object.keys(options);
 		let vals = [];
-		
 
-		for (let i = 0; i < keys.length; i++) { 
+
+		for (let i = 0; i < keys.length; i++) {
 			let key = options;
-			myQuery += '' + (table.getColumn(key))+ " = " + ' $' + (i + 1) + (i < keys.length - 1 ? ',' : '');
-			vals.push(options[key]);		
+			myQuery += '' + (table.getColumn(key)) + " = " + ' $' + (i + 1) + (i < keys.length - 1 ? ',' : '');
+			vals.push(options[key]);
 		}
 
 		return {
@@ -56,18 +60,18 @@ class QueryBuilder {
 
 
 	}
-	static delete (table, id) {
+	static delete(table, id) {
 
-		return {query: `DELETE FROM ${table.tableName} where ${table.getColumn('id')}  =  $1`, vals:[id]};
+		return { query: `DELETE FROM ${config.schema}.${table.tableName} where ${table.getColumn('id')}  =  $1`, vals: [id] };
 	}
-	static get (table, id) {
+	static get(table, id) {
 
-		return {query: `SELECT * FROM ${table.tableName} where ${table.getColumn('id')}  =  $1`, vals:[id]};
+		return { query: `SELECT * FROM ${config.schema}.${table.tableName} where ${table.getColumn('id')}  =  $1`, vals: [id] };
 	}
-	static list (tableName) {
+	static list(tableName) {
 
-		return {query: `SELECT * FROM ${tableName}`, vals:[]};
+		return { query: `SELECT * FROM ${config.schema}.${tableName}`, vals: [] };
 	}
 
 }
-module.exports =   QueryBuilder;
+module.exports = QueryBuilder;

@@ -11,6 +11,7 @@ module.exports = (() => {
         port: process.env.PG_PORT || 5432,
         ssl: process.env.PG_SSL == 'true'
         },
+        schema: process.env.PG_SCHEMA,
         log: process.env.PG_LOG == 'true'
     };
     return config;
