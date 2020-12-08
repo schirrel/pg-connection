@@ -1,5 +1,3 @@
-module.exports = (() => {
-
 class QueryBuilder {
 	static  insert (tableName, params)  {
 		let values = ' VALUES (';
@@ -72,8 +70,4 @@ class QueryBuilder {
 	}
 
 }
-
-
-
-	return QueryBuilder;
-})();
+module.exports =   QueryBuilder;

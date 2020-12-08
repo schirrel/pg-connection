@@ -1,3 +1,4 @@
+const Database = require('../Database');
 const Model = require('../Model');
 const QueryBuilder = require('../Utils/QueryBuilder');
 const Logger = require('../Utils/Logger');
