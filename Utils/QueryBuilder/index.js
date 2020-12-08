@@ -16,6 +16,7 @@ class QueryBuilder {
 			return params[key];
 		});
 		myQuery = myQuery.concat(values);
+		myQuery = myQuery.concat('RETURNING *');
 
 		return {
 			query: myQuery,
@@ -34,6 +35,8 @@ class QueryBuilder {
 		}
 
 		myQuery += " where id = $" + (vals.length + 1);
+		
+		myQuery = myQuery.concat('RETURNING *');
 		vals.push(params.id)
 
 		return {
