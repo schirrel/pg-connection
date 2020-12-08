@@ -45,14 +45,14 @@ class QueryBuilder {
 		};
 	}
 	static search(table, options) {
-		let myQuery = `SELECT *  FROM ${config.schema}.${table.tableName}  where`;
+		let myQuery = `SELECT *  FROM ${config.schema}.${table.tableName}  where `;
 		let keys = Object.keys(options);
 		let vals = [];
 
 
 		for (let i = 0; i < keys.length; i++) {
-			let key = options;
-			myQuery += '' + (table.getColumn(key)) + " = " + ' $' + (i + 1) + (i < keys.length - 1 ? ',' : '');
+			let key = keys[i];
+			myQuery += '' + (table.getColumn(key)) + " = " + ' $' + (i + 1) + (i < keys.length - 1 ? ' and ' : '');
 			vals.push(options[key]);
 		}
 
