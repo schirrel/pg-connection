@@ -9,7 +9,6 @@ module.exports = (() => {
 
     pool.on('connect', () => {
         if (config.log)
-            console.log('Database connected');
     });
 
     const query = (query, params = []) => pool.query(query, params);
