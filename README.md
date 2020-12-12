@@ -24,17 +24,19 @@ Uses `.env`  to aquire credentials.
 Using in 3 Steps
 
 1. .env
-``
+
+
+```
 PG_USER=postgres
 PG_URL=localhost
 PG_DATABASE=postgres
 PG_PASSWORD=postgres
 PG_SCHEMA=mercado_alencar
 PG_LOG=true
-``
+```
 
 2. Model
-```
+```javascript
 const Model = require('@schirrel/pg-connection/Model');
 class User extends Model{
 	constructor(args = {}){
@@ -51,7 +53,7 @@ module.exports = User;
 ```
 
 3. Repository
-```
+```javascript
 const Repository = require('@schirrel/pg-connection/Repository');
 const User = require('../models/User');
 
@@ -70,12 +72,12 @@ And thats it.
 ## TL;DR
 ### Model
 - Used as `extends Model` at your model class
-- Call `super("TAMBLE_NAME")` 
+- Call `super("TABLE_NAME")` with your table name 
 - To add a columns `this.addColumn('email', 'EMAIL');`, it accepts a 3rd parameter as the default value.
 - To set values of your constructor use ``this.setValues(args);`` 
 
 
 ### Repository
 - Used as `extends Repository` at your repo class
-- Call `super(YourClass);` with yout class reference
-- it already have build in: get(id), create(model), update(model),delete(id), list(), search(options)
+- Call `super(YourClass);` with your class reference
+- it already have built in: get(id), create(model), update(model),delete(id), list(), search(options)
