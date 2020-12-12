@@ -21,15 +21,28 @@ Uses `.env`  to aquire credentials.
 
 ## Usage
 
-1. Model
+Using in 3 Steps
+
+1. .env
+``
+PG_USER=postgres
+PG_URL=localhost
+PG_DATABASE=postgres
+PG_PASSWORD=postgres
+PG_SCHEMA=mercado_alencar
+PG_LOG=true
+``
+
+2. Model
 ```
 const Model = require('@schirrel/pg-connection/Model');
 class User extends Model{
 	constructor(args = {}){
-	super("USER")
+	super("USER");
 	this.addColumn('email', 'EMAIL');
 	this.addColumn('name', 'NAME');
 	this.addColumn('password', 'PASSWORD');
+	this.addColumn('active', 'ACTIVE', true);
 	this.setValues(args);
 	}
 }
@@ -37,7 +50,7 @@ class User extends Model{
 module.exports = User;
 ```
 
-2. Repository
+3. Repository
 ```
 const Repository = require('@schirrel/pg-connection/Repository');
 const User = require('../models/User');
@@ -53,47 +66,16 @@ module.exports = UserRepository;
 
 And thats it.
 
-### Database
-#### connect
-Function to start connection, desired to be calling on your server initialization 
 
---------------------------------------------------
-
+## TL;DR
 ### Model
-The model to your table.
-
-#### constructor(tableName)
-
-
-#### setValues(vals, fromDatabase)(tableName)
-
-#### addColumn(property, column, defaultVal)
-
-#### getColumn(property)
-
-#### createUpdateObject() 
-
-#### createPersistObject()
+- Used as `extends Model` at your model class
+- Call `super("TAMBLE_NAME")` 
+- To add a columns `this.addColumn('email', 'EMAIL');`, it accepts a 3rd parameter as the default value.
+- To set values of your constructor use ``this.setValues(args);`` 
 
 
---------------------------------------------------
 ### Repository
-Repository to your entity
-#### constructor(_table)
-Requires the _table class object
-
-#### persist(model)
-
-#### get(id)
-
-#### create(model)
-
-#### update(model)
-
-#### delete(id)
-
-#### list()
-
-#### search(options)
-
-#### paginate(options) TODO
+- Used as `extends Repository` at your repo class
+- Call `super(YourClass);` with yout class reference
+- it already have build in: get(id), create(model), update(model),delete(id), list(), search(options)
