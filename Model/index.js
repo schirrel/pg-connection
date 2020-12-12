@@ -1,12 +1,28 @@
 
 class Model {
-	constructor(tableName){
+	constructor(tableName, options = {}){
 	this.id = null; 
 	this.tableName = tableName;
 	this._columnsInverse = {ID:'id'}
 	this._columns = {id: 'ID'};
-	this._defaults = {  };
-	}	
+	this._defaults = {};
+	
+	if(options.model)
+		this.populate(options);	
+		
+	}
+	
+	populate() {	
+		if(options.columns) {
+			for(var index in options.columns) {
+				let col = options.columns {					
+					this.addColumn(col.key, col.value, col.default);
+				} else {
+				throw new Error('Invalid columns structure. Required key and value, optional default')
+				}
+			}
+		}
+	}
 	
 	setValues(vals, fromDatabase) {
 		if(fromDatabase){
