@@ -19,6 +19,39 @@ Uses `.env`  to aquire credentials.
 |PG_LOG | Optional |false | |
 
 
+## Usage
+
+1. Model
+```
+const Model = require('@schirrel/pg-connection/Model');
+class User extends Model{
+	constructor(args = {}){
+	super("USER")
+	this.addColumn('email', 'EMAIL');
+	this.addColumn('name', 'NAME');
+	this.addColumn('password', 'PASSWORD');
+	this.setValues(args);
+	}
+}
+
+module.exports = User;
+```
+
+2. Repository
+```
+const Repository = require('@schirrel/pg-connection/Repository');
+const User = require('../models/User');
+
+class UserRepository extends Repository{
+	constructor(){
+		super(User);
+	}
+}
+
+module.exports = UserRepository;
+```
+
+And thats it.
 
 ### Database
 #### connect
