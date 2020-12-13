@@ -1,9 +1,11 @@
 # pg-connection
-Simple PotgreSQL wrapper for nodejs, to simplyfi its development
-
+Simple PotgreSQL wrapper for nodejs, to simplify its development.
 
 WIP
 
+
+## Install
+``npm install @schirrel/pg-connection --save``
 
 
 ### Config
