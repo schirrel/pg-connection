@@ -8,7 +8,7 @@ module.exports = (() => {
     const pool = new Pool(config.options);
 
     pool.on('connect', () => {
-        if (config.log)
+        //if (config.log) It suposed to long only when first connects but its loggin each query
     });
 
     const query = (query, params = []) => pool.query(query, params);
