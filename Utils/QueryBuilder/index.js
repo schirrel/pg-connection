@@ -24,7 +24,7 @@ class QueryBuilder {
 		};
 	}
 	static update(tableName, params) {
-		let myQuery = `UPDATE ${config.schema}.${tableName}  SET`;
+		let myQuery = `UPDATE ${config.schema}.${tableName}  SET `;
 		let keys = Object.keys(params).filter(k => k != 'id');
 		let vals = [];
 		for (let i = 0; i < keys.length; i++) {
