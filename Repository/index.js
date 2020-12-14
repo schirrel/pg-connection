@@ -27,7 +27,9 @@ class Repository {
 	}
 
 	async get(id) {
-		const res = await Database.query(QueryBuilder.get(this.tableName), [id]);
+		
+		let query = QueryBuilder.get(new this.table({id: id}));
+		const res = await Database.query(query.query, query.vals);
 		let response = await res.rows[0];
 		let model = new this.table();
 		model.setValues(response || {}, true)
