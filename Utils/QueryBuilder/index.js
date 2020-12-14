@@ -37,7 +37,7 @@ class QueryBuilder {
 		myQuery += " where id = $" + (vals.length + 1);
 		
 		myQuery = myQuery.concat(' RETURNING *');
-		vals.push(params.id)
+		vals.push(params.ID)
 
 		return {
 			query: myQuery,
