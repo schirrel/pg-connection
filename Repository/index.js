@@ -30,7 +30,7 @@ class Repository {
 		const res = await Database.query(QueryBuilder.get(this.tableName), [id]);
 		let response = await res.rows[0];
 		let model = new this.table();
-		model.setValues(response || {}, true)
+		model.setValues(response || {})
 		return model;
 	}
 	convert(model) {
