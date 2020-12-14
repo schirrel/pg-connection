@@ -67,9 +67,9 @@ class QueryBuilder {
 
 		return { query: `DELETE FROM ${config.schema}.${table.tableName} where ${table.getColumn('id')}  =  $1`, vals: [id] };
 	}
-	static get(table, id) {
+	static get(table) {
 
-		return { query: `SELECT * FROM ${config.schema}.${table.tableName} where ${table.getColumn('id')}  =  $1`, vals: [id] };
+		return { query: `SELECT * FROM ${config.schema}.${table.tableName} where ${table.getColumn('id')}  =  $1`, vals: [table.id] };
 	}
 	static list(tableName) {
 
