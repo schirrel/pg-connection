@@ -11,8 +11,8 @@ class Model {
 	setValues(vals, fromDatabase) {
 		if(fromDatabase){
 			for(let key in vals){
-				if(this._columnsInverse[key]) {
-					this[key] = vals[key];
+				if(this._columnsInverse[key.toUpperCase()]) {
+					this[this._columnsInverse[key.toUpperCase()]] = vals[key];
 				}	
 			}
 		} else {
