@@ -1,5 +1,9 @@
-const database = require('./Database');
+const Database = require('./Database');
+const Model = require('./Model');
+const Repository = require('./Repository');
 
-module.exports = (() => {
-  database.connect();
-})();
+module.exports = {
+    Database,
+    Model,
+    Repository
+}
