@@ -13,7 +13,6 @@ jobs:
         
   build:
     runs-on: ubuntu-latest    
-    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -24,7 +23,8 @@ jobs:
 
   publish-npm:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest    
+    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
