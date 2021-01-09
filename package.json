@@ -1,6 +1,6 @@
 {
   "name": "@schirrel/pg-connection",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "a simple pg wrapper",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "dotenv": "^8.2.0",
-    "pg": "^8.2.2"
+    "pg": "^7.4.2"
   },
   "homepage": "https://github.com/schirrel/pg-connection#readme",
   "publishConfig": {
