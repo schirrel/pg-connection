@@ -45,8 +45,8 @@ class QueryBuilder {
 		};
 	}
 	static search(table, options) {
-		let myQuery = `SELECT *  FROM ${config.schema}.${table.tableName}  where `;
 		let keys = Object.keys(options);
+		let myQuery = `SELECT *  FROM ${config.schema}.${table.tableName} ${keys.length ? 'where' :''} `;
 		let vals = [];
 
 
