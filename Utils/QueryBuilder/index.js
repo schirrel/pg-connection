@@ -44,8 +44,8 @@ class QueryBuilder {
 			values: vals
 		};
 	}
-	static search(table, options) {
-		let keys = Object.keys(options);
+	static search(table, properties, options={}) {
+		let keys = Object.keys(properties);
 		let myQuery = `SELECT *  FROM ${config.schema}.${table.tableName} ${keys.length ? 'where' :''} `;
 		let vals = [];
 
@@ -53,7 +53,12 @@ class QueryBuilder {
 		for (let i = 0; i < keys.length; i++) {
 			let key = keys[i];
 			myQuery += '' + (table.getColumn(key)) + " = " + ' $' + (i + 1) + (i < keys.length - 1 ? ' and ' : '');
-			vals.push(options[key]);
+			vals.push(properties[key]);
+		}
+
+		if(options.custom) {
+			myQuery += '' + custom.query;
+			vals.push(...custom.values);
 		}
 
 		return {
