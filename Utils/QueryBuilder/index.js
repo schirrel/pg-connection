@@ -57,8 +57,8 @@ class QueryBuilder {
 		}
 
 		if(options.custom) {
-			myQuery += '' + custom.query;
-			vals.push(...custom.values);
+			myQuery += '' + options.custom.query;
+			vals.push(...options.custom.values);
 		}
 
 		return {
