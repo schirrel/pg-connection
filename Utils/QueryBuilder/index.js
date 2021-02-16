@@ -58,7 +58,7 @@ class QueryBuilder {
 
 		if(options.custom) {
 			myQuery += '' + options.custom.query;
-			vals.push(...options.custom.values);
+			vals.push(...(options.custom.values || []));
 		}
 
 		return {

@@ -18,7 +18,7 @@ class Repository {
         persistObject.query,
         persistObject.values
       );
-      return  (res.rowCount == 1) ?  res.rows[0] : res;
+      return res.rowCount == 1 ? res.rows[0] : res;
     } catch (err) {
       Logger.error(err);
       err.erro = "ERRO";
@@ -67,19 +67,32 @@ class Repository {
   }
 
   async list() {
-    const res = await Database.query(`SELECT * FROM ${this.tableName}`, []);
-    let response = await res.rows;
+    const res = await this.search({}, {});
     return response;
   }
-  async search(properties, options) {
+  async search(properties = {}, options = {}) {
     const params = QueryBuilder.search(new this.table(), properties, options);
     const res = await Database.query(params.query, params.values);
     let response = await res.rows;
-    //TODO APPLY CONVERTION FROM DATABASE TO MODEL
-    return response;
+    let result = response.map((row) => new this.table(row, true));
+    return result;
   }
-  async paginate(options) {
-    //TODO
+  async paginate(properties) {
+    let pageParams = {
+      page: properties.page || 1,
+      size: properties.size || 10,
+    };
+    delete properties.page;
+    delete properties.size;
+
+    let options = {
+      query: ` LIMIT ${pageParams.size} OFFSET ${
+        pageParams.size * (pageParams.page - 1)
+      }`,
+      values: [],
+    };
+
+    return this.search(properties, options);
   }
 }
 
