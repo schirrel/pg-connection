@@ -10,8 +10,9 @@ class Model {
   toJSON() {
     let obj = { id: this.id };
     for (var col in this._columns) {
-      if (!(typeof this[col] === "undefined")) {
-        obj[col] = this[col];
+      let value = this[col];
+      if (!(typeof value=== "undefined")) {
+        obj[col] = value;
       }
     }
     return obj;
@@ -37,6 +38,7 @@ class Model {
         this[defs] = this._defaults[defs];
       }
     }
+    return this;
   }
 
   addColumn(property, column, defaultVal) {
