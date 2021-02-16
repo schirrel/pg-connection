@@ -11,7 +11,7 @@ class Model {
     let obj = { id: this.id };
     for (var col in this._columns) {
       if (!(typeof this[col] === "undefined")) {
-        obj[this._columns[col]] = this[col];
+        obj[col] = this[col];
       }
     }
     return obj;
