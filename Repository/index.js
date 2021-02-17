@@ -34,6 +34,13 @@ class Repository {
     model.setValues(response || {}, true);
     return model;
   }
+
+  async delete(id) {
+    let query = QueryBuilder.delete(new this.table({ id: id }));
+    const res = await Database.query(query.query, query.vals);
+    let deleted = await res.rowCount;
+    return deleted;
+  }
   convert(model) {
     if (model instanceof this.table) {
       return model;
@@ -60,11 +67,7 @@ class Repository {
     let toPersist = QueryBuilder.update(this.tableName, obj);
     return await this.persist(toPersist);
   }
-  async delete(id) {
-    const res = await Database.query(QueryBuilder.delete(this.tableName), [id]);
-    let response = await res.rows[0];
-    return this._setValues(response || {});
-  }
+
 
   async list() {
     const res = await this.search({}, {});

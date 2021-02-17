@@ -44,7 +44,8 @@ class QueryBuilder {
 			values: vals
 		};
 	}
-	static search(table, properties, options={}) {
+	static search(table, properties, options={useLike:{}}) {
+		const {useLike} = options;
 		let keys = Object.keys(properties);
 		let myQuery = `SELECT *  FROM ${config.schema}.${table.tableName} ${keys.length ? 'where' :''} `;
 		let vals = [];
@@ -52,7 +53,7 @@ class QueryBuilder {
 
 		for (let i = 0; i < keys.length; i++) {
 			let key = keys[i];
-			myQuery += '' + (table.getColumn(key)) + " = " + ' $' + (i + 1) + (i < keys.length - 1 ? ' and ' : '');
+			myQuery += '' + (table.getColumn(key)) + ( useLike && useLike[key] ? " LIKE " : " = ") + ' $' + (i + 1) + (i < keys.length - 1 ? ' and ' : '');
 			vals.push(properties[key]);
 		}
 
@@ -70,7 +71,7 @@ class QueryBuilder {
 	}
 	static delete(table, id) {
 
-		return { query: `DELETE FROM ${config.schema}.${table.tableName} where ${table.getColumn('id')}  =  $1`, vals: [id] };
+		return { query: `DELETE FROM ${config.schema}.${table.tableName} where ${table.getColumn('id')}  =  $1`, vals: [id || table.id] };
 	}
 	static get(table) {
 
