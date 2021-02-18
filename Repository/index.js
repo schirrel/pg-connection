@@ -58,27 +58,50 @@ class Repository {
   }
 
   async _create(model) {
-    let obj = model.createPersistObject();
-    let toPersist = QueryBuilder.insert(this.tableName, obj);
-    return await this.persist(toPersist);
+    try {
+      let obj = model.createPersistObject();
+      let toPersist = QueryBuilder.insert(this.tableName, obj);
+      return await this.persist(toPersist);
+    } catch (eerr) {
+      Logger.error(err);
+      err.erro = "ERRO";
+      return err;
+    }
   }
   async _update(model) {
-    let obj = model.createUpdateObject();
-    let toPersist = QueryBuilder.update(this.tableName, obj);
-    return await this.persist(toPersist);
+    try {
+      let obj = model.createUpdateObject();
+      let toPersist = QueryBuilder.update(this.tableName, obj);
+      return await this.persist(toPersist);
+    } catch (eerr) {
+      Logger.error(err);
+      err.erro = "ERRO";
+      return err;
+    }
   }
-
 
   async list() {
-    const res = await this.search({}, {});
-    return response;
+    try {
+      const res = await this.search({}, {});
+      return response;
+    } catch (eerr) {
+      Logger.error(err);
+      err.erro = "ERRO";
+      return err;
+    }
   }
   async search(properties = {}, options = {}) {
-    const params = QueryBuilder.search(new this.table(), properties, options);
-    const res = await Database.query(params.query, params.values);
-    let response = await res.rows;
-    let result = response.map((row) => new this.table(row, true));
-    return result;
+    try {
+      const params = QueryBuilder.search(new this.table(), properties, options);
+      const res = await Database.query(params.query, params.values);
+      let response = await res.rows;
+      let result = response.map((row) => new this.table(row, true));
+      return result;
+    } catch (eerr) {
+      Logger.error(err);
+      err.erro = "ERRO";
+      return err;
+    }
   }
   async paginate(properties) {
     let pageParams = {
