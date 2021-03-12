@@ -63,7 +63,7 @@ class Model {
     }
   }
   
-  hasJoins() {
+  get hasJoins() {
   return !!Object.keys(this._joins).length;
   }
   createUpdateObject() {
