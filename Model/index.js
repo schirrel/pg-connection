@@ -5,6 +5,7 @@ class Model {
     this._columnsInverse = { ID: "id" };
     this._columns = { id: "ID" };
     this._defaults = {};
+    this._joins = {};
   }
 
   toJSON() {
@@ -49,11 +50,22 @@ class Model {
     if (typeof defaultVal !== "undefined") this._defaults[_prop] = defaultVal;
     return this;
   }
-
+  
+ 
   getColumn(property) {
     return this._columns[property];
   }
-
+ /*In fact is not a joint but will keep this name*/
+  addJoin(propertyOnParent, targetClass, propertyOnChild) {
+    this._joins[propertyOnParent] = {
+    property: propertyOnChild,
+      target: targetClass
+    }
+  }
+  
+  hasJoins() {
+  return !!Object.keys(this._joins).length;
+  }
   createUpdateObject() {
     let obj = {};
 
@@ -64,10 +76,6 @@ class Model {
       }
     }
     return obj;
-  }
-  
-  child(ChildClass, property) {
-    // TODO SELECT CHILD CLASS FROM PARENT ID USING PROPERTY IN CHILD AT WHERE  
   }
 
   createPersistObject() {
