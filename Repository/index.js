@@ -32,6 +32,17 @@ class Repository {
     let response = await res.rows[0];
     let model = new this.table();
     model.setValues(response || {}, true);
+    
+    if(model.hasJoins) {
+      let joins =  model._joins.map(join=>  {
+        query = QueryBuilder.join(join, model.id);
+       return Database.query(query.query, query.vals);
+        });
+      
+     let joins = await  Promise.all (joins) ;
+      //TODO
+    
+    }
     return model;
   }
 
