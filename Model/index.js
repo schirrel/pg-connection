@@ -65,6 +65,10 @@ class Model {
     }
     return obj;
   }
+  
+  child(ChildClass, property) {
+    // TODO SELECT CHILD CLASS FROM PARENT ID USING PROPERTY IN CHILD AT WHERE  
+  }
 
   createPersistObject() {
     let obj = {};
