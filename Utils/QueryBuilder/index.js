@@ -77,6 +77,10 @@ class QueryBuilder {
 
 		return { query: `SELECT * FROM ${config.schema}.${table.tableName} where ${table.getColumn('id')}  =  $1`, vals: [table.id] };
 	}
+	static join(join, parentId) {
+
+		return { query: `SELECT * FROM ${config.schema}.${join.target.tableName} where ${join.target.getColumn(join.property)}  =  $1`, vals: [parentId] };
+	}
 	static list(tableName) {
 
 		return { query: `SELECT * FROM ${config.schema}.${tableName}`, vals: [] };
