@@ -97,7 +97,7 @@ class Repository {
       let response = await res.rows;
       let result = response.map((row) => new this.table(row, true));
       return result;
-    } catch (eerr) {
+    } catch (err) {
       Logger.error(err);
       err.erro = "ERRO";
       return err;
