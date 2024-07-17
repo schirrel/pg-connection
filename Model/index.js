@@ -1,17 +1,19 @@
 class Model {
-  constructor(tableName) {
+  constructor(tableName, primaryColumn = { id: "ID" }) {
     this.id = null;
     this.tableName = tableName;
-    this._columnsInverse = { ID: "id" };
-    this._columns = { id: "ID" };
+    this._columnsInverse = {};
+    this._columns = {}
+    this._primaryColumn = "ID";
     this._defaults = {};
+    this.addColumn(Object.keys(primaryColumn)[0], Object.values(primaryColumn)[0], null, true);
   }
 
   toJSON() {
     let obj = { id: this.id };
     for (var col in this._columns) {
       let value = this[col];
-      if (!(typeof value=== "undefined")) {
+      if (!(typeof value === "undefined")) {
         obj[col] = value;
       }
     }
@@ -21,8 +23,8 @@ class Model {
   setValues(vals, fromDatabase) {
     if (fromDatabase) {
       for (let key in vals) {
-        if (this._columnsInverse[key.toUpperCase()]) {
-          this[this._columnsInverse[key.toUpperCase()]] = vals[key];
+        if (this._columnsInverse[key]) {
+          this[this._columnsInverse[key]] = vals[key];
         }
       }
     } else {
@@ -41,18 +43,29 @@ class Model {
     return this;
   }
 
-  addColumn(property, column, defaultVal) {
+  addColumn(property, column, defaultVal, primary) {
     let _prop = property;
     let _col = column || property;
     this._columns[_prop] = _col;
     this._columnsInverse[_col] = _prop;
     if (typeof defaultVal !== "undefined") this._defaults[_prop] = defaultVal;
+    if (primary) {
+      this._primaryColumn = column;
+    }
     return this;
   }
 
   getColumn(property) {
     return this._columns[property];
   }
+
+  get primaryKey() {
+    return this._primaryColumn;
+  }
+  get primaryKeyValue() {
+    return this[this._primaryColumn];
+  }
+
 
   createUpdateObject() {
     let obj = {};
@@ -76,6 +89,10 @@ class Model {
       delete obj[this._columns.id];
     }
     return obj;
+  }
+
+  setPrimaryKeyValue(value) {
+    this[this._primaryColumn] = value;
   }
 }
 module.exports = Model;
