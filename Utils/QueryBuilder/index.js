@@ -23,9 +23,9 @@ class QueryBuilder {
 			values: arrayValues
 		};
 	}
-	static update(tableName, params) {
+	static update(tableName, params, primaryKey) {
 		let myQuery = `UPDATE ${config.schema}.${tableName}  SET `;
-		let keys = Object.keys(params).filter(k => k != 'id');
+		let keys = Object.keys(params).filter(k => k != primaryKey);
 		let vals = [];
 		for (let i = 0; i < keys.length; i++) {
 			if (keys[i] != 'id') {
@@ -34,10 +34,10 @@ class QueryBuilder {
 			}
 		}
 
-		myQuery += " where id = $" + (vals.length + 1);
+		myQuery += ` where ${primaryKey} = $${(vals.length + 1)}`;
 		
 		myQuery = myQuery.concat(' RETURNING *');
-		vals.push(params.ID)
+		vals.push(params[primaryKey])
 
 		return {
 			query: myQuery,
@@ -71,11 +71,11 @@ class QueryBuilder {
 	}
 	static delete(table, id) {
 
-		return { query: `DELETE FROM ${config.schema}.${table.tableName} where ${table.getColumn('id')}  =  $1`, vals: [id || table.id] };
+		return { query: `DELETE FROM ${config.schema}.${table.tableName} where  ${table.primaryKey}  =  $1`, vals: [id || ttable.primaryKeyValue] };
 	}
 	static get(table) {
 
-		return { query: `SELECT * FROM ${config.schema}.${table.tableName} where ${table.getColumn('id')}  =  $1`, vals: [table.id] };
+		return { query: `SELECT * FROM ${config.schema}.${table.tableName} where  ${table.primaryKey}  =  $1`, vals: [table.primaryKeyValue] };
 	}
 	static list(tableName) {
 
