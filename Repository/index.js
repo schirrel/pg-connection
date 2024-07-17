@@ -60,7 +60,7 @@ class Repository {
   async _create(model) {
     try {
       let obj = model.createPersistObject();
-      let toPersist = QueryBuilder.insert(this.tableName, obj);
+      let toPersist = QueryBuilder.insert(this.tableName, obj, model.primaryKey);
       return await this.persist(toPersist);
     } catch (err) {
       Logger.error(err);
