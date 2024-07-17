@@ -62,7 +62,7 @@ class Repository {
       let obj = model.createPersistObject();
       let toPersist = QueryBuilder.insert(this.tableName, obj);
       return await this.persist(toPersist);
-    } catch (eerr) {
+    } catch (err) {
       Logger.error(err);
       err.erro = "ERRO";
       return err;
@@ -73,7 +73,7 @@ class Repository {
       let obj = model.createUpdateObject();
       let toPersist = QueryBuilder.update(this.tableName, obj);
       return await this.persist(toPersist);
-    } catch (eerr) {
+    } catch (err) {
       Logger.error(err);
       err.erro = "ERRO";
       return err;
@@ -84,7 +84,7 @@ class Repository {
     try {
       const res = await this.search({}, {});
       return response;
-    } catch (eerr) {
+    } catch (err) {
       Logger.error(err);
       err.erro = "ERRO";
       return err;
